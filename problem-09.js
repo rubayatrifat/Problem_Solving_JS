@@ -1,31 +1,35 @@
 /*
 
-Write a function, which takes a non-negative integer (seconds) as input and returns the time in a human-readable format (HH:MM:SS)
+Write a function that takes a string of braces, and determines if the order of the braces is valid. It should return true if the string is valid, and false if it's invalid.
 
-HH = hours, padded to 2 digits, range: 00 - 99
-MM = minutes, padded to 2 digits, range: 00 - 59
-SS = seconds, padded to 2 digits, range: 00 - 59
-The maximum time never exceeds 359999 (99:59:59)
+This Kata is similar to the Valid Parentheses Kata, but introduces new characters: brackets [], and curly braces {}. Thanks to @arnedag for the idea!
 
-You can find some examples in the test fixtures.; 
+All input strings will be nonempty, and will only consist of parentheses, brackets and curly braces: ()[]{}.
+
+What is considered Valid?
+A string of braces is considered valid if all braces are matched with the correct brace.
 
 */
 
 
-function humanReadable(seconds) {
-    let SS = seconds
-    let HH, MM
-    if (seconds > 359999) {
-        return "The Number is too big to calculate"
-    } else {
-        MM = Math.trunc(SS / 60)
-        SS = SS - (MM * 60)
-        HH = Math.trunc(MM / 60)
-        MM = MM - (HH * 60)
+function validBraces(braces) {
+    let stack = []
+    const pairs = {
+        ')': '(',
+        '}': '{',
+        ']': '['
+    };
+    for (let i = 0; i < braces.length; i++) {
+        if (braces[i] === "(" || braces[i] === "{" || braces[i] === "[") {
+            stack.push(braces[i])
+        } else {
+            if (stack.pop() !== pairs[braces[i]]) {
+                return false
+            }
+        }
     }
-
-    return `${HH.toString().padStart(2, '0')}:${MM.toString().padStart(2, '0')}:${SS.toString().padStart(2, '0')}`;
+    return stack.length === 0;
 }
 
 
-console.log(humanReadable(0))
+console.log(validBraces("{{{{([[{)}]])}}}}"))
