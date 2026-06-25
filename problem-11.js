@@ -18,97 +18,111 @@ eight(dividedBy(three()));
 */
 
 
-function zero(operation) {
-    if (operation) {
-        return operation(0)
-    } else {
-        return 0
-    }
-}
-function one(operation) {
-    if (operation) {
-        return operation(1)
-    } else {
-        return 1
-    }
-}
-function two(operation) {
-    if (operation) {
-        return operation(2)
-    } else {
-        return 2
-    }
-}
-function three(operation) {
-    if (operation) {
-        return operation(3)
-    } else {
-        return 3
-    }
-}
-function four(operation) {
-    if (operation) {
-        return operation(4)
-    } else {
-        return 4
-    }
-}
-function five(operation) {
-    if (operation) {
-        return operation(5)
-    } else {
-        return 5
-    }
-}
-function six(operation) {
-    if (operation) {
-        return operation(6)
-    } else {
-        return 6
-    }
-}
-function seven(operation) {
-    if (operation) {
-        return operation(7)
-    } else {
-        return 7
-    }
-}
-function eight(operation) {
-    if (operation) {
-        return operation(8)
-    } else {
-        return 8
-    }
-}
-function nine(operation) {
-    if (operation) {
-        return operation(9)
-    } else {
-        return 9
-    }
-}
+// function zero(operation) {
+//     if (operation) {
+//         return operation(0)
+//     } else {
+//         return 0
+//     }
+// }
+// function one(operation) {
+//     if (operation) {
+//         return operation(1)
+//     } else {
+//         return 1
+//     }
+// }
+// function two(operation) {
+//     if (operation) {
+//         return operation(2)
+//     } else {
+//         return 2
+//     }
+// }
+// function three(operation) {
+//     if (operation) {
+//         return operation(3)
+//     } else {
+//         return 3
+//     }
+// }
+// function four(operation) {
+//     if (operation) {
+//         return operation(4)
+//     } else {
+//         return 4
+//     }
+// }
+// function five(operation) {
+//     if (operation) {
+//         return operation(5)
+//     } else {
+//         return 5
+//     }
+// }
+// function six(operation) {
+//     if (operation) {
+//         return operation(6)
+//     } else {
+//         return 6
+//     }
+// }
+// function seven(operation) {
+//     if (operation) {
+//         return operation(7)
+//     } else {
+//         return 7
+//     }
+// }
+// function eight(operation) {
+//     if (operation) {
+//         return operation(8)
+//     } else {
+//         return 8
+//     }
+// }
+// function nine(operation) {
+//     if (operation) {
+//         return operation(9)
+//     } else {
+//         return 9
+//     }
+// }
 
-function plus(rightNum) { 
-    return function (leftNum) {
-        return rightNum + leftNum
-    }
-}
-function minus(rightNum) {
-    return function(leftNum) {
-        return leftNum - rightNum
-    }
- }
-function times(rightNum) { 
-    return function(leftNum) {
-        return rightNum * leftNum
-    }
-}
-function dividedBy(rightNum) { 
-    return function(leftNum) {
-        return Math.floor(leftNum / rightNum) 
-    }
-}
+// function plus(rightNum) {
+//     return function (leftNum) {
+//         return rightNum + leftNum
+//     }
+// }
+// function minus(rightNum) {
+//     return function(leftNum) {
+//         return leftNum - rightNum
+//     }
+//  }
+// function times(rightNum) {
+//     return function(leftNum) {
+//         return rightNum * leftNum
+//     }
+// }
+// function dividedBy(rightNum) {
+//     return function(leftNum) {
+//         return Math.floor(leftNum / rightNum)
+//     }
+// }
+
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach(num => {
+    const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+
+    globalThis[words[num]] = function (operation) {
+        return operation ? operation(num) : num;
+    };
+});
+
+const plus = rightNum => leftNum => leftNum + rightNum;
+const minus = rightNum => leftNum => leftNum - rightNum;
+const times = rightNum => leftNum => leftNum * rightNum;
+const dividedBy = rightNum => leftNum => Math.floor(leftNum / rightNum);
+
 
 
 console.log(six(dividedBy(two())))
