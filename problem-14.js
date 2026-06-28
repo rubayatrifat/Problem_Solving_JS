@@ -23,19 +23,53 @@ Tests include some extraordinarily high pyramids so as you can guess, brute-forc
 
 
 
-/// GREADY Method
+/// ========= GREADY Method
+
+// function longestSlideDown(pyramid) {
+//     let resultSum = pyramid[0][0]
+//     let currentIndex = 0
+//     for (let i = 1; i < pyramid.length; i++) {
+//         if (pyramid[i][currentIndex] > pyramid[i][currentIndex + 1]) {
+//             resultSum += pyramid[i][currentIndex]
+//         } else {
+//             resultSum += pyramid[i][currentIndex + 1]
+//             currentIndex++
+//         }
+//     }
+//     return resultSum;
+// }
+
+
+// console.log(longestSlideDown([
+//     [3],
+//     [7, 4],
+//     [2, 4, 6],
+//     [8, 5, 9, 3]]
+// ))
+
+
+
+/// ========== DP Method
+
 function longestSlideDown(pyramid) {
-    let resultSum = pyramid[0][0]
-    let currentIndex = 0
-    for (let i = 1; i < pyramid.length; i++) {
-        if (pyramid[i][currentIndex] > pyramid[i][currentIndex + 1]) {
-            resultSum += pyramid[i][currentIndex]
-        } else {
-            resultSum += pyramid[i][currentIndex + 1]
-            currentIndex++
+    let resultSum = 0
+    let arrayNum = 0
+
+    for (let i = pyramid.length - 1; i >= 0; i--) {
+
+        for (let j = 0; j < pyramid[i].length; j++) {
+            if (pyramid[i][j] > pyramid[i][j + 1] && arrayNum < pyramid[i - 1][j] + pyramid[i][j]) {
+                arrayNum = pyramid[i - 1][j] + pyramid[i][j]
+
+            } else if (pyramid[i][j] < pyramid[i][j + 1] && arrayNum < pyramid[i - 1][j] + pyramid[i][j + 1]) {
+                arrayNum = pyramid[i - 1][j] + pyramid[i][j + 1]
+            }
         }
+
+        resultSum += arrayNum
+        arrayNum = 0
     }
-    return resultSum;
+    return resultSum
 }
 
 
@@ -45,3 +79,7 @@ console.log(longestSlideDown([
     [2, 4, 6],
     [8, 5, 9, 3]]
 ))
+
+
+
+// 
