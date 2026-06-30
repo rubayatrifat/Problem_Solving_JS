@@ -51,27 +51,40 @@ Tests include some extraordinarily high pyramids so as you can guess, brute-forc
 
 /// ========== DP Method
 
-function longestSlideDown(pyramid) {
-    let resultSum = 0
-    let arrayNum = 0
+// function longestSlideDown(pyramid) {
+//     let resultSum = 0
+//     let arrayNum = 0
 
-    for (let i = pyramid.length - 1; i >= 0; i--) {
+//     for (let i = pyramid.length - 1; i >= 0; i--) {
+
+//         for (let j = 0; j < pyramid[i].length; j++) {
+//             if (pyramid[i][j] > pyramid[i][j + 1] && arrayNum < pyramid[i - 1][j] + pyramid[i][j]) {
+//                 arrayNum = pyramid[i - 1][j] + pyramid[i][j]
+
+//             } else if (pyramid[i][j] < pyramid[i][j + 1] && arrayNum < pyramid[i - 1][j] + pyramid[i][j + 1]) {
+//                 arrayNum = pyramid[i - 1][j] + pyramid[i][j + 1]
+//             }
+//         }
+
+//         resultSum += arrayNum
+//         arrayNum = 0
+//     }
+//     return resultSum
+// }
+
+
+function longestSlideDown(pyramid) {
+    for (let i = pyramid.length - 2; i >= 0; i--) {
 
         for (let j = 0; j < pyramid[i].length; j++) {
-            if (pyramid[i][j] > pyramid[i][j + 1] && arrayNum < pyramid[i - 1][j] + pyramid[i][j]) {
-                arrayNum = pyramid[i - 1][j] + pyramid[i][j]
 
-            } else if (pyramid[i][j] < pyramid[i][j + 1] && arrayNum < pyramid[i - 1][j] + pyramid[i][j + 1]) {
-                arrayNum = pyramid[i - 1][j] + pyramid[i][j + 1]
-            }
+            pyramid[i][j] += Math.max(pyramid[i + 1][j], pyramid[i + 1][j + 1]);
+
         }
-
-        resultSum += arrayNum
-        arrayNum = 0
     }
-    return resultSum
-}
 
+    return pyramid[0][0];
+}
 
 console.log(longestSlideDown([
     [3],
